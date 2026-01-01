@@ -378,6 +378,217 @@ class SocialChessAPITester:
             self.log_test("User profile", False, str(e))
             return False
 
+    def test_chess_com_lookup(self):
+        """Test Chess.com username lookup"""
+        print("\n♟️ Testing Chess.com lookup...")
+        try:
+            # Test with a known Chess.com username
+            username = "gothamchess"
+            response = requests.get(f"{self.api_url}/chess/lookup/chess_com/{username}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                self.log_test("Chess.com lookup", True, f"Found user {data.get('username')} with rating {data.get('best_rating')}")
+                return True
+            elif response.status_code == 404:
+                self.log_test("Chess.com lookup", False, f"User {username} not found")
+                return False
+            else:
+                self.log_test("Chess.com lookup", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Chess.com lookup", False, str(e))
+            return False
+
+    def test_lichess_lookup(self):
+        """Test Lichess username lookup"""
+        print("\n♟️ Testing Lichess lookup...")
+        try:
+            # Test with a known Lichess username
+            username = "DrNykterstein"
+            response = requests.get(f"{self.api_url}/chess/lookup/lichess/{username}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                self.log_test("Lichess lookup", True, f"Found user {data.get('username')} with rating {data.get('best_rating')}")
+                return True
+            elif response.status_code == 404:
+                self.log_test("Lichess lookup", False, f"User {username} not found")
+                return False
+            else:
+                self.log_test("Lichess lookup", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Lichess lookup", False, str(e))
+            return False
+
+    def test_chess_account_linking(self):
+        """Test chess account linking functionality"""
+        print("\n🔗 Testing chess account linking...")
+        if not self.session_token:
+            self.log_test("Chess account linking", False, "No session token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.session_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Test linking Chess.com account
+            link_data = {
+                "platform": "chess_com",
+                "username": "gothamchess"
+            }
+            
+            response = requests.post(f"{self.api_url}/chess/link", json=link_data, headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                self.log_test("Link Chess.com account", True, f"Linked {data.get('rating_data', {}).get('username')} with rating {data.get('rating_data', {}).get('best_rating')}")
+                
+                # Test linking Lichess account
+                link_data_lichess = {
+                    "platform": "lichess", 
+                    "username": "DrNykterstein"
+                }
+                
+                response = requests.post(f"{self.api_url}/chess/link", json=link_data_lichess, headers=headers)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    self.log_test("Link Lichess account", True, f"Linked {data.get('rating_data', {}).get('username')} with rating {data.get('rating_data', {}).get('best_rating')}")
+                    return True
+                else:
+                    self.log_test("Link Lichess account", False, f"Status: {response.status_code}, Response: {response.text}")
+                    return False
+            else:
+                self.log_test("Link Chess.com account", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Chess account linking", False, str(e))
+            return False
+
+    def test_chess_refresh_ratings(self):
+        """Test refreshing chess ratings"""
+        print("\n🔄 Testing chess ratings refresh...")
+        if not self.session_token:
+            self.log_test("Chess refresh ratings", False, "No session token available")
+            return False
+        
+        try:
+            headers = {"Authorization": f"Bearer {self.session_token}"}
+            response = requests.post(f"{self.api_url}/chess/refresh", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                results = data.get("results", [])
+                self.log_test("Chess refresh ratings", True, f"Refreshed {len(results)} accounts")
+                return True
+            elif response.status_code == 400:
+                # This is expected if no chess accounts are linked
+                self.log_test("Chess refresh ratings", True, "No chess accounts linked (expected)")
+                return True
+            else:
+                self.log_test("Chess refresh ratings", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Chess refresh ratings", False, str(e))
+            return False
+
+    def test_chess_unlink_accounts(self):
+        """Test unlinking chess accounts"""
+        print("\n🔓 Testing chess account unlinking...")
+        if not self.session_token:
+            self.log_test("Chess unlink accounts", False, "No session token available")
+            return False
+        
+        try:
+            headers = {"Authorization": f"Bearer {self.session_token}"}
+            
+            # Test unlinking Chess.com account
+            response = requests.delete(f"{self.api_url}/chess/unlink/chess_com", headers=headers)
+            
+            if response.status_code == 200:
+                self.log_test("Unlink Chess.com account", True, "Successfully unlinked")
+            else:
+                self.log_test("Unlink Chess.com account", False, f"Status: {response.status_code}")
+                return False
+            
+            # Test unlinking Lichess account
+            response = requests.delete(f"{self.api_url}/chess/unlink/lichess", headers=headers)
+            
+            if response.status_code == 200:
+                self.log_test("Unlink Lichess account", True, "Successfully unlinked")
+                return True
+            else:
+                self.log_test("Unlink Lichess account", False, f"Status: {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Chess unlink accounts", False, str(e))
+            return False
+
+    def test_existing_chess_user(self):
+        """Test with existing chess user testchess@example.com"""
+        print("\n🎯 Testing existing chess user...")
+        
+        # Login with existing test user
+        login_data = {
+            "email": "testchess@example.com",
+            "password": "test123"
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.api_url}/auth/login",
+                json=login_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                user_data = response.json()
+                # Extract session token
+                if 'Set-Cookie' in response.headers:
+                    cookies = response.headers['Set-Cookie']
+                    if 'session_token=' in cookies:
+                        test_session_token = cookies.split('session_token=')[1].split(';')[0]
+                
+                self.log_test("Login existing chess user", True, f"Logged in as: {user_data.get('name')}")
+                
+                # Check if user has chess accounts linked
+                headers = {"Authorization": f"Bearer {test_session_token}"}
+                response = requests.get(f"{self.api_url}/auth/me", headers=headers)
+                
+                if response.status_code == 200:
+                    user_info = response.json()
+                    chess_com_username = user_info.get('chess_com_username')
+                    lichess_username = user_info.get('lichess_username')
+                    
+                    if chess_com_username:
+                        self.log_test("Existing Chess.com account", True, f"Found linked account: {chess_com_username}")
+                    else:
+                        self.log_test("Existing Chess.com account", False, "No Chess.com account linked")
+                    
+                    if lichess_username:
+                        self.log_test("Existing Lichess account", True, f"Found linked account: {lichess_username}")
+                    else:
+                        self.log_test("Existing Lichess account", True, "No Lichess account linked (expected)")
+                    
+                    return True
+                else:
+                    self.log_test("Get existing user info", False, f"Status: {response.status_code}")
+                    return False
+            else:
+                self.log_test("Login existing chess user", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Existing chess user test", False, str(e))
+            return False
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting Social Chess Events Backend API Tests")
