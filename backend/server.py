@@ -377,7 +377,11 @@ async def get_me(user: dict = Depends(get_current_user)):
         city=user.get("city"),
         bio=user.get("bio"),
         picture=user.get("picture"),
-        created_at=user.get("created_at")
+        created_at=user.get("created_at"),
+        chess_com_username=user.get("chess_com_username"),
+        chess_com_rating=user.get("chess_com_rating"),
+        lichess_username=user.get("lichess_username"),
+        lichess_rating=user.get("lichess_rating")
     )
 
 @api_router.post("/auth/logout")
