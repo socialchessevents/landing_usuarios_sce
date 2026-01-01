@@ -97,7 +97,7 @@ export default function CreateEvent() {
         </Button>
 
         <div className="bg-white rounded-2xl p-8 shadow-sm border border-border/50">
-          <h1 className="font-heading text-2xl md:text-3xl font-bold text-mahogany-900 mb-2">
+          <h1 className="font-heading text-2xl md:text-3xl font-bold text-[#5c330a] mb-2">
             Crear Nuevo Evento
           </h1>
           <p className="text-muted-foreground mb-8">
@@ -275,7 +275,7 @@ export default function CreateEvent() {
             {/* Submit */}
             <Button 
               type="submit" 
-              className="w-full bg-mahogany-500 hover:bg-mahogany-600 text-white rounded-full py-6 mt-4"
+              className="w-full bg-[#5c330a] hover:bg-[#4A2908] text-white rounded-full py-6 mt-4"
               disabled={loading}
               data-testid="submit-event"
             >

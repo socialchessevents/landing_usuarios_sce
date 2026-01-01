@@ -46,7 +46,7 @@ export default function MyEvents() {
       <Navbar />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-mahogany-900 mb-8">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-[#5c330a] mb-8">
           Mis Eventos
         </h1>
 
@@ -54,7 +54,7 @@ export default function MyEvents() {
           <TabsList className="bg-white border border-border/50 p-1 rounded-xl mb-8">
             <TabsTrigger 
               value="joined" 
-              className="data-[state=active]:bg-mahogany-500 data-[state=active]:text-white rounded-lg px-6"
+              className="data-[state=active]:bg-[#5c330a] data-[state=active]:text-white rounded-lg px-6"
               data-testid="tab-joined"
             >
               <Users className="w-4 h-4 mr-2" />
@@ -62,7 +62,7 @@ export default function MyEvents() {
             </TabsTrigger>
             <TabsTrigger 
               value="organized"
-              className="data-[state=active]:bg-mahogany-500 data-[state=active]:text-white rounded-lg px-6"
+              className="data-[state=active]:bg-[#5c330a] data-[state=active]:text-white rounded-lg px-6"
               data-testid="tab-organized"
             >
               <Trophy className="w-4 h-4 mr-2" />
