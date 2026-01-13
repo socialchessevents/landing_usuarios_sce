@@ -1,8 +1,5 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 :root {
   --color-primary: #5c330a;
@@ -22,12 +19,10 @@ h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -45,7 +40,6 @@ html {
   background: var(--color-primary);
 }
 
-/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -64,7 +58,6 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Feature cards hover effect */
 .feature-card {
   transition: all 0.3s ease;
 }
@@ -74,12 +67,10 @@ html {
   box-shadow: 0 20px 40px rgba(92, 51, 10, 0.15);
 }
 
-/* Timeline styles */
 .timeline-line {
   background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-light));
 }
 
-/* Button styles */
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   transition: all 0.3s ease;
@@ -90,7 +81,6 @@ html {
   box-shadow: 0 10px 30px rgba(92, 51, 10, 0.3);
 }
 
-/* Section transitions */
 .section-fade {
   opacity: 0;
   transform: translateY(30px);
