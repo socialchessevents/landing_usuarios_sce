@@ -1,60 +1,59 @@
-# Social Chess Events - PRD
+# Chess Events - Landing Page PRD
 
-## Problem Statement
-MVP web full-stack para la comunidad de ajedrez en Cataluña. Permite a usuarios y clubes organizar y unirse a eventos de ajedrez.
+## Resumen
+Landing page estática en Next.js para Chess Events, una app de ajedrez presencial.
 
-## User Personas
-1. **Jugadores**: Buscan eventos cerca de su ciudad, se unen a partidas y torneos
-2. **Clubes**: Organizan eventos, gestionan miembros con niveles de juego
+## Implementado (Enero 2026)
 
-## Core Requirements
-- Auth: Password simple + Google OAuth (Emergent)
-- Eventos: CRUD con filtros (ciudad, fecha, nivel, tipo)
-- Unirse a eventos con control de plazas
-- Perfiles de usuario y club diferenciados
-- Clubes pueden añadir miembros con nivel
+### Tecnología
+- Next.js 16 con App Router
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion para animaciones
+- Página 100% estática
 
-## What's Been Implemented (Jan 2026)
-- ✅ Landing page con hero y CTAs
-- ✅ Listado de eventos con filtros
-- ✅ Detalle de evento con botón unirse
-- ✅ Crear evento (usuarios autenticados)
-- ✅ Mis eventos (joined + organized)
-- ✅ Auth dual: password + Google OAuth
-- ✅ Perfil de usuario editable
-- ✅ Listado de clubes con búsqueda
-- ✅ Perfil de club con miembros y eventos
-- ✅ Gestión de miembros para clubes
-- ✅ 12 eventos seed en Barcelona/Sabadell/Terrassa
-- ✅ 2 clubes seed con datos
-- ✅ UI Playtomic-style con colores mahogany/beige
-- ✅ Mobile bottom navigation
-- ✅ Enlace encuesta configurable
-- ✅ **Integración Chess.com** - Vincular cuenta, importar ratings
-- ✅ **Integración Lichess** - Vincular cuenta, importar ratings
-- ✅ **Auto-cálculo de nivel** - Basado en rating (principiante <1200, medio 1200-1800, avanzado >1800)
-- ✅ **Refrescar ratings** - Actualizar ratings desde APIs
-- ✅ **Desvincular cuentas** - Eliminar vinculación
+### Secciones de la Landing
+1. **Hero** - Mensaje principal "El ajedrez vuelve al tablero real" con CTAs
+2. **¿Qué es?** - 6 cards explicando funcionalidades principales
+3. **Timeline de Funcionalidades** - Red social, torneos, eventos, seguimiento en vivo, gamificación
+4. **SCE Points** - Explicación de los espacios colaboradores (bares, cafeterías)
+5. **Cómo funciona** - 4 pasos para empezar
+6. **Formulario Beta** - Captación de usuarios (Nombre, Ciudad, Email*)
+7. **Footer** - Logo, enlace a encuesta
 
-## Tech Stack
-- Frontend: React + Tailwind + Shadcn UI
-- Backend: FastAPI + Motor (async MongoDB)
-- Auth: bcrypt + Emergent Google OAuth
-- Database: MongoDB
-- External APIs: Chess.com Public API, Lichess API
+### Configuración
+Archivo `/src/config.ts` para personalizar:
+- `betaSignupApi`: URL del endpoint para el formulario
+- `surveyUrl`: URL de la encuesta de Google Forms
+- `contactEmail`: Email de contacto
 
-## Prioritized Backlog
-### P0 (Done)
-- Core event CRUD ✅
-- Auth system ✅
-- User/Club profiles ✅
-- Chess.com/Lichess integration ✅
+### Formulario Beta
+- Campos: Nombre (opcional), Ciudad (opcional), Email (requerido)
+- Actualmente en modo demo (console.log)
+- Para conectar a un backend real, modificar `betaSignupApi` en config.ts
+- Compatible con: Formspree, Netlify Forms, API propia
 
-### P1 (Next)
-- Notificaciones de eventos
-- Sistema de mensajería entre usuarios
-- Mapa de eventos
+## Colores
+- Primary: #5c330a (marrón chocolate)
+- Background: #F5F0E8 (beige claro)
+- Accent: #8B5A2B (marrón claro)
 
-### P2 (Future)
-- Sistema de rankings/ELO interno
-- Pagos para torneos premium
+## Logo
+https://customer-assets.emergentagent.com/job_playmate-chess/artifacts/p4fd6hj4_Presentacio%CC%81n%20app%20y%20MVP.png
+
+## URLs Importantes
+- Encuesta: https://docs.google.com/forms/d/e/1FAIpQLSeQFsCSq0LHRU47WYyAxKZjKn6UHFWJ8_cXQNDjMMa7bYhRKw/viewform?usp=dialog
+
+## Para Deploy Estático
+```bash
+cd frontend
+yarn build
+# Los archivos estáticos están en .next/
+# O usar: yarn export para generar en /out
+```
+
+## Siguientes Pasos
+- [ ] Configurar endpoint real para formulario beta (Formspree, API propia, etc.)
+- [ ] Añadir analytics (Google Analytics, Plausible, etc.)
+- [ ] Optimizar imágenes con next/image
+- [ ] Añadir meta tags de Open Graph para compartir
