@@ -395,8 +395,8 @@ function SCEPointsSection() {
             viewport={{ once: true }}
           >
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Coffee className="w-4 h-4" />
-              Nueva funcionalidad
+              <Lightbulb className="w-4 h-4" />
+              Innovación
             </div>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
