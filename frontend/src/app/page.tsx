@@ -289,8 +289,8 @@ function FeaturesTimeline() {
   const features = [
     {
       icon: Users,
-      title: "Red Social de Ajedrez",
-      description: "Busca jugadores por ELO, país o nombre. Envía solicitudes de amistad, chatea y crea tu perfil público con tu historial y logros.",
+      title: "Comunidad de Ajedrez Local",
+      description: "Encuentra jugadores cerca de ti por nivel o ubicación. Conecta, queda para partidas presenciales y construye tu red de rivales en tu ciudad.",
       color: "bg-blue-500"
     },
     {
