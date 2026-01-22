@@ -6,12 +6,11 @@ import {
   MapPin, Users, Trophy, Calendar, MessageCircle, Bell, 
   Star, Target, Clock, Search, ChevronRight, Coffee,
   Building2, Sparkles, Shield, Zap, ArrowRight, Check,
-  ExternalLink, Mail, User, MapPinned
+  ExternalLink, Mail, User, MapPinned, Lightbulb
 } from "lucide-react";
 import { config } from "@/config";
 
 // Use config values
-const BETA_SIGNUP_API = config.betaSignupApi;
 const SURVEY_URL = config.surveyUrl;
 
 export default function Home() {
