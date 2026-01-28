@@ -38,7 +38,7 @@ function Navbar() {
             <img 
               src="sce.png" 
               alt="Social Chess Events" 
-              className="h-10 object-contain"
+              className="h-20 object-contain"
             />
           </a>
           
@@ -711,7 +711,7 @@ function Footer() {
             <img 
               src="sce-white.png" 
               alt="Social Chess Events" 
-              className="h-10 brightness-0 invert"
+              className="h-20 brightness-0 invert"
             />
           </div>
 
