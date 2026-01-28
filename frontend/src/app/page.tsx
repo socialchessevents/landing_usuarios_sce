@@ -36,7 +36,7 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center">
             <img 
-              src="../../public/sce.png" 
+              src="sce.png" 
               alt="Social Chess Events" 
               className="h-10 object-contain"
             />
@@ -151,7 +151,7 @@ function HeroSection() {
               {/* Main Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=800&q=80"
+                  src="tablero.jpg"
                   alt="Jugadores de ajedrez"
                   className="w-full h-[500px] object-cover"
                 />
@@ -441,7 +441,7 @@ function SCEPointsSection() {
           >
             <div className="relative rounded-3xl overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800&q=80"
+                src="bar.jpg"
                 alt="Café con ajedrez"
                 className="w-full h-[400px] object-cover"
               />
@@ -709,7 +709,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <img 
-              src="../../public/sce-white.png" 
+              src="sce-white.png" 
               alt="Social Chess Events" 
               className="h-10 brightness-0 invert"
             />
