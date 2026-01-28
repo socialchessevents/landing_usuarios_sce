@@ -6,12 +6,11 @@ import {
   MapPin, Users, Trophy, Calendar, MessageCircle, Bell, 
   Star, Target, Clock, Search, ChevronRight, Coffee,
   Building2, Sparkles, Shield, Zap, ArrowRight, Check,
-  ExternalLink, Mail, User, MapPinned
+  ExternalLink, Mail, User, MapPinned, Lightbulb
 } from "lucide-react";
 import { config } from "@/config";
 
 // Use config values
-const BETA_SIGNUP_API = config.betaSignupApi;
 const SURVEY_URL = config.surveyUrl;
 
 export default function Home() {
@@ -241,12 +240,12 @@ function WhatIsSection() {
             {
               icon: Calendar,
               title: "Inscripción sencilla",
-              description: "Sistema estilo Playtomic: apúntate en segundos, gestiona listas de espera y recibe confirmaciones automáticas."
+              description: "Apúntate a partidas presenciales en segundos. Gestiona listas de espera y recibe confirmaciones automáticas."
             },
             {
               icon: Users,
               title: "Conecta con jugadores",
-              description: "Perfiles de usuario, chat integrado y sistema de amigos para encontrar rivales de tu nivel."
+              description: "Encuentra jugadores cerca de ti, queda para partidas presenciales y crea tu red de rivales locales."
             },
             {
               icon: Trophy,
@@ -290,8 +289,8 @@ function FeaturesTimeline() {
   const features = [
     {
       icon: Users,
-      title: "Red Social de Ajedrez",
-      description: "Busca jugadores por ELO, país o nombre. Envía solicitudes de amistad, chatea y crea tu perfil público con tu historial y logros.",
+      title: "Comunidad de Ajedrez Local",
+      description: "Encuentra jugadores cerca de ti por nivel o ubicación. Conecta, queda para partidas presenciales y construye tu red de rivales en tu ciudad.",
       color: "bg-blue-500"
     },
     {
@@ -396,8 +395,8 @@ function SCEPointsSection() {
             viewport={{ once: true }}
           >
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Coffee className="w-4 h-4" />
-              Nueva funcionalidad
+              <Lightbulb className="w-4 h-4" />
+              Innovación
             </div>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -533,18 +532,16 @@ function BetaSignupSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.email) {
-      setErrorMsg("El email es obligatorio");
+    // Validation - Name and Email are required by Google Form
+    if (!formData.name.trim()) {
+      setErrorMsg("El nombre es obligatorio");
       setStatus("error");
       return;
     }
-
-    // Check if API is configured
-    if (BETA_SIGNUP_API.includes("YOUR_FORM_ID") || !BETA_SIGNUP_API) {
-      // For demo purposes, show success even without backend
-      console.log("Beta signup (demo mode):", formData);
-      setStatus("success");
-      setFormData({ name: "", city: "", email: "" });
+    
+    if (!formData.email.trim()) {
+      setErrorMsg("El email es obligatorio");
+      setStatus("error");
       return;
     }
 
@@ -552,19 +549,34 @@ function BetaSignupSection() {
     setErrorMsg("");
 
     try {
-      const response = await fetch(BETA_SIGNUP_API, {
+      // Submit to Google Forms
+      const googleFormUrl = config.googleFormUrl;
+      const entries = config.googleFormEntries;
+      
+      const formBody = new URLSearchParams();
+      formBody.append(entries.name, formData.name);
+      formBody.append(entries.email, formData.email);
+      if (formData.city) {
+        formBody.append(entries.city, formData.city);
+      }
+
+      // Google Forms doesn't return CORS headers, so we use no-cors mode
+      // This means we won't get a proper response, but the data will be submitted
+      await fetch(googleFormUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formBody.toString(),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", city: "", email: "" });
-      } else {
-        throw new Error("Error al enviar");
-      }
-    } catch {
+      // Since no-cors doesn't give us response status, we assume success
+      setStatus("success");
+      setFormData({ name: "", city: "", email: "" });
+      
+    } catch (error) {
+      console.error("Form submission error:", error);
       setStatus("error");
       setErrorMsg("Ha ocurrido un error. Inténtalo de nuevo.");
     }
@@ -614,10 +626,11 @@ function BetaSignupSection() {
                 <div>
                   <label className="block text-sm font-medium text-[#5c330a] mb-2">
                     <User className="w-4 h-4 inline mr-2" />
-                    Nombre
+                    Nombre <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Tu nombre"
