@@ -37,8 +37,8 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_playmate-chess/artifacts/p4fd6hj4_Presentacio%CC%81n%20app%20y%20MVP.png" 
-              alt="Chess Events" 
+              src="../../public/sce.png" 
+              alt="Social Chess Events" 
               className="h-10 object-contain"
             />
           </a>
@@ -223,7 +223,7 @@ function WhatIsSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#5c330a] mb-6">
-            ¿Qué es Chess Events?
+            ¿Qué es Social Chess Events?
           </h2>
           <p className="text-lg text-[#5c330a]/70 leading-relaxed">
             Una app diseñada para conectar a <strong>jugadores, clubes y organizadores</strong> de ajedrez 
@@ -589,7 +589,7 @@ function BetaSignupSection() {
               ¿Quieres ser de los primeros?
             </h2>
             <p className="text-lg text-[#5c330a]/70 max-w-xl mx-auto">
-              Únete a la versión beta de Chess Events y ayúdanos a crear la mejor plataforma 
+              Únete a la versión beta de Social Chess Events y ayúdanos a crear la mejor plataforma 
               para la comunidad de ajedrez. <strong>Plazas limitadas.</strong>
             </p>
           </div>
@@ -677,7 +677,7 @@ function BetaSignupSection() {
               </button>
 
               <p className="text-center text-sm text-[#5c330a]/50">
-                Al registrarte aceptas recibir comunicaciones sobre Chess Events. 
+                Al registrarte aceptas recibir comunicaciones sobre Social Chess Events. 
                 Sin spam, lo prometemos.
               </p>
             </form>
@@ -696,8 +696,8 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <img 
-              src="https://customer-assets.emergentagent.com/job_playmate-chess/artifacts/p4fd6hj4_Presentacio%CC%81n%20app%20y%20MVP.png" 
-              alt="Chess Events" 
+              src="../../public/sce-white.png" 
+              alt="Social Chess Events" 
               className="h-10 brightness-0 invert"
             />
           </div>
@@ -719,7 +719,7 @@ function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50 text-sm">
-          © 2025 Chess Events. Todos los derechos reservados.
+          © 2025 Social Chess Events. Todos los derechos reservados.
         </div>
       </div>
     </footer>
